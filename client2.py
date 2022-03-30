@@ -34,10 +34,15 @@ class MainWindow(QWidget):
         self.label3.move(10,80)
         self.text3.move(10,105)
 
+        self.label4 = QLabel("Enter the Hostname:", self)
+        self.text4 = QLineEdit(self)
+        self.label4.move(10,130)
+        self.text4.move(10,150)
+
         self.label2 = QLabel("Answer:", self)
-        self.label2.move(10, 150)
+        self.label2.move(10, 200)
         self.button = QPushButton("Send", self)
-        self.button.move(10, 210)
+        self.button.move(10, 250)
 
         self.button.pressed.connect(self.on_click)
 
@@ -55,7 +60,8 @@ class MainWindow(QWidget):
     def on_click(self):
         hostname = self.text.text()
         key = self.text3.text()
-        res = self.__query("http://127.0.0.1:8000/ip/"+hostname+"?key="+key)
+        hostip = self.text4.text()
+        res = self.__query("http://"+hostip+"/ip/"+hostname+"?key="+key)
         if res and type(res)==dict:
             lat=str(res["latitude"])
             long=str(res["longitude"])
@@ -73,8 +79,7 @@ class MainWindow(QWidget):
                 return r.json()
         except:
             return None
-
-
+            
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     main = MainWindow()
