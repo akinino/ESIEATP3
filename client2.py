@@ -15,6 +15,7 @@ from hashlib import new
 from os import system
 from tokenize import String
 
+
 class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
@@ -54,7 +55,7 @@ class MainWindow(QWidget):
 
 
     def get_ip(self):
-        #Recupere Ip automatiquement#
+        #recupere l'adresse ip
         url="https://api64.ipify.org?format=json"
         res = self.__query(url)
         if res:
